@@ -48,12 +48,14 @@ namespace temperature_sensor_GUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            List<string> saveData = tmpData;
+            saveFileDialog1.ShowDialog();
+
+            //List<string> saveData = tmpData;
             //for (int i = 0; i < saveData.Capacity; i++)
             //{
 
             //}
-            System.IO.File.WriteAllLines(@"C:\Users\Michael\Documents\Temp\tmp.txt", saveData);
+            //System.IO.File.WriteAllLines(@"%USERPROFILE%\Desktop\tmp.txt", saveData);
         }
 
         public void tester()
@@ -176,6 +178,13 @@ namespace temperature_sensor_GUI
             {
                 arduinoBoard.Write("Red" + setLEDRed);
             }
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            List<string> saveData = tmpData;
+            string fileName = saveFileDialog1.FileName;
+            System.IO.File.WriteAllLines(fileName, saveData);
         }
     }
 }
